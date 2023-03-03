@@ -1,0 +1,318 @@
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  background-color: #292e3a;
+  min-height: 84px;
+
+  .welcomeBox {
+    display: flex;
+    align-items: center;
+    align-self: center;
+
+    .menuOutlined {
+      color: white;
+      padding: 3px;
+      font-size: 30px;
+      display: flex;
+      align-items: center;
+      margin: 10px;
+    }
+
+    .welcomeText {
+      color: white;
+      font-size: 1.4rem;
+    }
+  }
+
+  .rightMenuHeader {
+    display: flex;
+    align-content: center;
+    gap: 10px;
+    margin-right: 10px;
+
+    .BLDivContainer {
+      border-right: 1px solid rgba(255, 255, 255, 0.21);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0px 10px;
+      flex-direction: row-reverse;
+      font-size: 16px;
+
+      .Lspan {
+        color: #25be5d;
+      }
+
+      .Bspan {
+        color: white;
+        border-right: 1px solid rgba(255, 255, 255, 0.21);
+        padding-right: 10px;
+      }
+    }
+
+    .bellIconLi {
+      display: flex;
+      align-items: center;
+
+      button {
+        display: flex;
+        align-items: center;
+        background-color: #292e3a;
+      }
+
+      :global(.anticon-bell) {
+        color: white;
+        font-size: 16px;
+      }
+    }
+
+    .userProfileDropDownContainer {
+      display: flex;
+      align-items: center;
+
+      .userProfileDropDownWrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .ProfileImageLogo {
+          img {
+            width: 50px;
+            height: 50px;
+          }
+        }
+
+        .profileUserNameText {
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+.layoutSetting {
+  flex-direction: inherit !important;
+  background-color: #181f2c;
+
+  :global(.ant-layout-sider) {
+    background-color: #181f2c;
+  }
+
+  :global(.ant-layout-sider-children) {
+    overflow-y: auto !important;
+    max-height: calc(100vh - 60px);
+  }
+
+  :global(.ant-menu-item) {
+    width: 80%;
+    margin: auto;
+    padding-left: 30px;
+  }
+
+  :global(.ant-menu-title-content) {
+    padding-left: 0px;
+  }
+
+  .mainMenu {
+    .brandLogo {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 85px;
+        height: 80px;
+
+      }
+
+      h1 {
+        font-size: 54px;
+        color: white;
+      }
+    }
+  }
+
+  
+}
+
+:global(.ant-layout-sider-collapsed) {
+  .mainMenu {
+    .brandLogo {
+      h1 {
+        display: none;
+      }
+    }
+  }
+
+  :global(.ant-menu-item-only-child) {
+    padding-left: 32px;
+  }
+  
+}
+
+.sidebarSetting {
+  background-color: #181f2c;
+
+  :global(.ant-layout-sider-trigger) {
+    display: none;
+  }
+
+  :global(.ant-menu-item-selected) {
+    background-color: #085845;
+    box-shadow: 3px 4px 0px #000000;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
+  } 
+
+  :global(.ant-menu-item-back) {
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+  } 
+ 
+  :global(.ant-menu-item-active) {
+
+  
+
+    img {
+        width: 200px;
+        height: 200px;
+
+    }
+
+  } 
+
+  :global(.ant-menu-title-content) {
+    margin-left: -20px;
+  }
+
+  :global(.ant-menu-root) {
+    background-color: #181f2c;
+  }
+
+
+}
+
+:global(.ant-layout-sider) {
+       
+  height: 100vh;
+
+  flex: 0 0 250px !important;
+  max-width: 250px !important;
+  min-width: 250px !important;
+
+  &:global(.ant-layout-sider-collapsed) {
+    flex: 0 0 100px !important;
+    max-width: 100px !important;
+    min-width: 100px !important;
+
+  }
+
+  @media screen and (max-width: 986px) {
+
+    &:global(.ant-layout-sider-collapsed) {   
+
+      &.mobileshow {
+        display: none !important;
+      }
+
+      display: none !important;
+    }
+
+    &:global(.ant-layout-sider-has-trigger) {
+      
+      &.mobileHide {
+        flex: 0 0 250px !important;
+        max-width: 250px !important;
+        min-width: 250px !important;
+  
+      }
+
+      &.sidebarSetting {
+        z-index: 200;
+        position: absolute;
+        -webkit-transition: all 0.4s ease;
+        -moz-transition: all 0.4s ease;
+        transition: all 0.4s ease;
+        min-height: calc(100vh - 60px);
+      }
+
+     
+    }
+  }
+}
+
+.notificationCard {
+  width: 340px;
+  height: auto;
+  padding-right: 10px;
+  :global(.ant-card-body) {
+    padding: 12px;
+  }
+  a {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    color: #00c1f9;
+  }
+}
+.mainDiv {
+  overflow: auto;
+  max-height: 400px;
+  padding-right: 12px;
+}
+.notificationProfile {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 15px 0;
+}
+
+.notificationImage {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.employeeName {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 24px;
+  color: #191919;
+
+  p {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #9d9d9d;
+  }
+}
+
+.avator {
+  width: 32px;
+  height: 32px;
+
+  img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+}
+
+.punchTime {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  text-align: right;
+  color: #9d9d9d;
+  margin-top: 4px;
+}
+

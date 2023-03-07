@@ -1,14 +1,38 @@
 //// PROPS CONSTANTS ////
 export const HASH_LINK = "#";
-export const TARGET_BLANK = "_blank";
+export const LOWER_TARGET_BLANK = "_blank";
 export const LOWER_SUBMIT = "submit";
 export const COLOR_BLACK = "#000";
-export const COLOR_WHITE = "#fff";
+export const LOWER_COLOR_WHITE = "#fff";
 export const LOWER_CENTER = "center";
-export const BODY_ONE = "body1";
+export const LOWER_BODY_ONE = "body1";
+export const LOWER_BASIC = "basic";
+export const INITIAL_VALUES = { remember: true }
+export const LOWER_OFF = "off"
+export const LOWER_EMAIL = "email"
+export const CAMEL_ON_BLUR = "onBlur"
+export const LOWER_LABLE_BETWEEN_MIN_MAX = "${label} must be between ${min} and ${max}"
+export const EMAIL_PLACE_HOLDER = "name@domain.com"
+export const LOWER_DARK = "dark"
+export const LOWER_LIGHT = "light"
+export const LOWER_TRANSPARENT = "transparent"
+export const LOWER_PASSWORD = 'password'
+export const CAMEL_PASSWORD = 'Password'
+export const LOWER_TEXT = "text"
+
 
 //// TEXT CONSTANTS ////
-export const UPPER_SUBMIT = "Submit";
-export const UPPER_ABOUT = "About";
+export const CAP_SUBMIT = "Submit";
+export const CAP_ABOUT = "About";
 export const LOWER_NONE = "none";
 export const LOWER_BOLD = "bold";
+export const UPPER_OUR_POLICIES = "OUR POLICIES";
+export const CAP_LOGO = "Logo"
+export const LOWER_NOT_VALID = "is not a valid"
+export const LOWER_IS_REQUIRED = "is required"
+export const LOWER_LABLE_REQUIRED = "${label} " + LOWER_IS_REQUIRED;
+export const LOWER_LABEL_NOT_VALID =  "${label} " + LOWER_NOT_VALID
+export const CAP_EMAIL = "Email"
+export const LOWER_NUMBER = "number"
+export const LOWER_TEXT_AREA = "textarea"
+export const CAP_LOGIN = "Login"

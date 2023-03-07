@@ -1,34 +1,19 @@
-import React, { useState } from "react";
-import Routing from "../../router-service";
-import { observer } from "mobx-react";
-import style from "./style.module.scss";
-import Header from "./Sidebar/header";
-import { Layout } from "antd";
-import Sider from "antd/lib/layout/Sider";
-import Sidebar from "./Sidebar/sidebar";
-import classNames from "classnames";
+import { useLocation } from 'react-router-dom'
+import React from 'react'
+import { observer } from 'mobx-react-lite'
+import { constRoute } from '@utils/route'
+import PrivateLayout from './main-layout/private-layout'
+import PublicLayout from './main-layout/public-layout'
 
 const DefaultLayout = observer(() => {
-  const [collapsed, setCollapsed] = useState(false);
+  const router = useLocation()
+  const path = router.pathname
 
-  return (
-    <Layout className={style.layoutSetting}>
-      <Sider
-        className={
-          !collapsed
-            ? classNames(style.mobileHide, style.sidebarSetting)
-            : classNames(style.mobileshow, style.sidebarSetting)
-        }
-        collapsible
-        collapsed={collapsed}
-      >
-        <Sidebar collapsed={collapsed} />
-      </Sider>
-      <Layout>
-        <Header setCollapsed={setCollapsed} collapsed={collapsed} />
-        <Routing />
-      </Layout>
-    </Layout>
-  );
-});
-export default DefaultLayout;
+  const publicPages = [
+    constRoute.login,
+  ]
+
+  return publicPages.includes(path) ? <PublicLayout /> : <PrivateLayout />
+})
+
+export default DefaultLayout

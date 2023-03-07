@@ -1,0 +1,127 @@
+@import '@assets/styles/colors';
+
+:global(.ant-form-item-has-error) {
+  :global(.ant-form-item-control-input) {
+    .customInput {
+      // margin-bottom: 10px;
+    }
+  }
+}
+
+.customInput {
+  display: flex;
+  position: relative;
+  width: 100%;
+  :global(.ant-input-affix-wrapper) {
+    &:global(.ant-input-password) {
+      &.roundInput {
+        // margin-bottom: 10px;
+      }
+    }
+  }
+
+  input,
+  .roundInput {
+    border-radius: 4px;
+    font-weight: 400;
+    margin: 1px;
+    // padding-top: 10px;
+    transition: 0.3s all ease-in-out;
+    width: 100%;
+    border-color: $dark-border-half-white;
+    word-spacing: -4px !important;
+
+    &:hover {
+      border-color: $color-link !important;
+      outline: none;
+      transition: 0.3s all ease-in-out;
+    }
+
+    &:focus,
+    &:active,
+    &:visited {
+      border-color: $color-link !important;
+      border-right-width: 1px !important;
+      box-shadow: $color-shadow;
+      outline: 0;
+    }
+
+    :global(.ant-form-item-explain-error) {
+      color: blue !important;
+    }
+  }
+
+  textarea {
+    border-radius: 4px;
+    margin: 1px;
+    padding: 5px 10px;
+    transition: 0.3s all ease-in-out;
+    width: 100%;
+    padding-top: 15px;
+
+    &:hover {
+      border-color: $color-link important;
+      outline: none;
+      transition: 0.3s all ease-in-out;
+    }
+
+    &:focus,
+    &:active,
+    &:visited {
+      border-color: $color-link !important;
+      border-right-width: 1px !important;
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+      outline: 0;
+    }
+
+    .roundInput {
+      border-radius: 100px;
+    }
+  }
+
+  .inputNumber {
+    border: 0;
+    width: 100%;
+
+    input {
+      height: 100%;
+      position: absolute;
+      top: 0;
+      border: 1px solid #d9d9d9;
+    }
+  }
+}
+
+.light {
+  background-color: $color-body-background !important;
+  border: 1px solid $color-body-background !important;
+  color: #333 !important;
+}
+
+.dark {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 242, 242, 0.38);
+  color: $color-white !important;
+  :global(.ant-input) {
+    background-color: rgba(255, 255, 255, 0.0);
+    border-radius: 5px;
+}
+}
+
+.transparent {
+  background-color: transparent !important;
+  border: 0 !important;
+  color: $color-gray-light !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}

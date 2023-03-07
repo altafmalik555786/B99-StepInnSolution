@@ -4,6 +4,7 @@ import style from "./style.module.scss";
 import { ButtonType, ButtonShape, ButtonHTMLType } from "antd/lib/button";
 import { SizeType } from "antd/lib/config-provider/SizeContext";
 import classNames from "classnames";
+import useFitText from "use-fit-text";
 
 export interface buttonProps {
   className?: string;
@@ -26,6 +27,8 @@ export interface buttonProps {
 }
 
 const CustomButton = (props: buttonProps) => {
+  const { fontSize, ref } = useFitText();
+
   return (
     <Button
       className={classNames(style.commonButton, props.className)}
@@ -43,7 +46,9 @@ const CustomButton = (props: buttonProps) => {
       type={props.type}
       onClick={props.onClick}
     >
-      {props.startData || ""} {props.title} {props.endData || ""}
+      <div ref={ref} style={{ fontSize }} className={style.textContainer} >
+        {props.startData || ""} {props.title} {props.endData || ""}
+      </div>
     </Button>
   );
 };

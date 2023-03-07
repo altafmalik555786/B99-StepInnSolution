@@ -1,7 +1,8 @@
 export const constRoute = {
   dashboard: "/",
   hash: "#",
-  login: "login",
+  login: "/login",
+  forgotPassword: "/forgot-password",
   profile: "/profile",
   soccer: '/soccer',
   tennis: '/tennis',

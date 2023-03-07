@@ -2,8 +2,8 @@ import React from "react";
 import "./App.css";
 import "./style.module.scss";
 import { BrowserRouter as Router } from "react-router-dom";
-
 import DefaultLayout from "@components/layout";
+
 
 function App() {
   return (

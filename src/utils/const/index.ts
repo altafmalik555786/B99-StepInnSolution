@@ -13,14 +13,13 @@ export const LOWER_EMAIL = "email"
 export const CAMEL_ON_BLUR = "onBlur"
 export const LOWER_LABLE_BETWEEN_MIN_MAX = "${label} must be between ${min} and ${max}"
 export const CAP_USER_NAME = "Username"
+export const LOWER_USER_NAME = "username"
 export const LOWER_DARK = "dark"
 export const LOWER_LIGHT = "light"
 export const LOWER_TRANSPARENT = "transparent"
 export const LOWER_PASSWORD = 'password'
 export const CAMEL_PASSWORD = 'Password'
 export const LOWER_TEXT = "text"
-export const LOWER_ERROR = "error"
-export const LOWER_TOKEN = "token"
 
 
 //// TEXT CONSTANTS ////
@@ -38,3 +37,12 @@ export const CAP_EMAIL = "Email"
 export const LOWER_NUMBER = "number"
 export const LOWER_TEXT_AREA = "textarea"
 export const CAP_LOGIN = "Login"
+export const UPPER_O_BET = "OBET"
+export const LOWER_ERROR = "error"
+export const LOWER_TOKEN = "token"
+export const CAP_CREATE = "Create";
+export const CAP_NEW = "New";
+export const CAP_USER = "User"
+export const CAP_CREATE_NEW = CAP_CREATE + " " + CAP_NEW
+
+

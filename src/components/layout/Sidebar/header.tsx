@@ -12,14 +12,17 @@ import useWindowSize from "@utils/hooks/useWindowSize";
 import style from "../style.module.scss";
 import { observer } from "mobx-react";
 import { Popover, Button } from "antd";
-import BellIconDark from '@assets/icons/bell-icon-dark.png'
+import BellIconDark from "@assets/icons/bell-icon-dark.png";
 import ProfileImage from "@assets/images/profile-image.png";
-import SettingLight from '@assets/icons/setting-light.png'
-import { LOWER_TOKEN } from "@utils/const";
+import SettingLight from "@assets/icons/setting-light.png";
+import { LOWER_TOKEN, UPPER_O_BET } from "@utils/const";
+import useFitText from "use-fit-text";
+import { useStore } from "@stores/root-store";
 
 const Header = observer(({ setCollapsed, collapsed }: any) => {
-
+  const { fontSize, ref } = useFitText();
   const navigate = useNavigate();
+
   const onLogout = () => {
     localStorage.setItem("userRegister", "true");
     localStorage.removeItem(LOWER_TOKEN);
@@ -37,8 +40,7 @@ const Header = observer(({ setCollapsed, collapsed }: any) => {
     if (!localStorage.getItem(LOWER_TOKEN)) {
       navigate(constRoute.login);
     }
-  }, [])
-  
+  }, []);
 
   const dropdownMenu = (
     <Menu className="nav-dropdown">
@@ -67,7 +69,7 @@ const Header = observer(({ setCollapsed, collapsed }: any) => {
         className={style.notificationCard}
       >
         <div className={style.mainDiv}>
-        <div className={style.notificationProfile}>
+          <div className={style.notificationProfile}>
             <div className={style.notificationImage}>
               <div className={style.avator}>
                 <img src={ProfileImage} alt={"Profile Img"} />
@@ -109,24 +111,28 @@ const Header = observer(({ setCollapsed, collapsed }: any) => {
           className={style.menuOutlined}
         />
         <Link className={style.welcomeText} to={constRoute.dashboard}>
-        <span> Welcome to B99 👋</span>
-        {/* <img src={""} alt="Hi! icon" />   */}
+            <div ref={ref} style={{ fontSize }} className={style.textContainer}>
+              Welcome to 1<i>{UPPER_O_BET}</i> 👋
+            </div>
         </Link>
       </div>
+      
+    
+      
       {/* /Header Title */}
 
       {/* Header Menu */}
       <ul className={style.rightMenuHeader}>
-        <div className={style.BLDivContainer} >
-            <span className={style.Lspan} >
-              L: {0}
-            </span>
-            <span className={style.Bspan} >
-              B: {0}
-            </span>
+        <div className={style.BLDivContainer}>
+          <span className={style.Lspan}>L: {0}</span>
+          <span className={style.Bspan}>B: {0}</span>
         </div>
         <li className={style.bellIconLi}>
-            <Button type="text" shape="circle" icon={<img src={SettingLight} />} />
+          <Button
+            type="text"
+            shape="circle"
+            icon={<img src={SettingLight} />}
+          />
         </li>
         <Popover
           content={notificationsContent}
@@ -135,11 +141,15 @@ const Header = observer(({ setCollapsed, collapsed }: any) => {
           overlayClassName="noti-wrapper"
         >
           <li className={style.bellIconLi}>
-            <Button type="text" shape="circle" icon={<img src={BellIconDark} />} />
+            <Button
+              type="text"
+              shape="circle"
+              icon={<img src={BellIconDark} />}
+            />
           </li>
         </Popover>
         <li className={style.userProfileDropDownContainer}>
-          <Row className={style.userProfileDropDownWrapper} >
+          <Row className={style.userProfileDropDownWrapper}>
             <div className={style.ProfileImageLogo}>
               <Tooltip title="User Name">
                 <img src={ProfileImage} />
@@ -148,7 +158,10 @@ const Header = observer(({ setCollapsed, collapsed }: any) => {
             <Dropdown overlay={dropdownMenu} trigger={["click"]}>
               <a onClick={(e) => e.preventDefault()}>
                 <Space className="header-dropdown">
-                  <span className={style.profileUserNameText}> {"User Name"}</span>
+                  <span className={style.profileUserNameText}>
+                    {" "}
+                    {"User Name"}
+                  </span>
                   <span className="mobile">
                     <i className="fa fa-ellipsis-v" />
                   </span>

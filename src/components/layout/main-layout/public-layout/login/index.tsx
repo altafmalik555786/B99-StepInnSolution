@@ -4,6 +4,7 @@ import style from "./style.module.scss";
 import loginLogo from "@assets/icons/logo-2.png";
 import loginCoin from "@assets/icons/logo.png";
 import CustomButton from "@components/common-components/custom-button";
+
 import {
   CAMEL_ON_BLUR,
   CAP_EMAIL,
@@ -16,20 +17,22 @@ import {
   LOWER_LABLE_BETWEEN_MIN_MAX,
   LOWER_LABLE_REQUIRED,
   LOWER_OFF,
-  LOWER_NOT_VALID,
   UPPER_OUR_POLICIES,
   LOWER_NUMBER,
-  EMAIL_PLACE_HOLDER,
+  CAP_USER_NAME,
   LOWER_DARK,
   LOWER_TEXT,
   CAMEL_PASSWORD,
   LOWER_PASSWORD,
   LOWER_SUBMIT,
+  CAP_LOGIN,
 } from "@utils/const";
 import { Form } from "antd";
 import { CommonInput } from "@components/common-components/input";
 import DarkUserLogo from "@assets/icons/dark-user-logo.png"
 import DarkLock from "@assets/icons/dark-lock.png"
+import { useStore } from "@stores/root-store";
+import { useNavigate } from "react-router-dom";
 
 const validateMessages = {
   required: LOWER_LABLE_REQUIRED,
@@ -44,12 +47,17 @@ const validateMessages = {
 
 const Login = observer(() => {
   const [form] = Form.useForm();
-  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate()
+
+  const { user: { onUserLoginInfo, isLoading } } = useStore(null)
 
   const onLogin = (values) => {
- 
+    const data = {
+      "password": values?.password,
+       "userName": values?.email
+   }
+    onUserLoginInfo(data, navigate)
   };
-
 
   const LoginForm = () => {
     return (
@@ -67,12 +75,11 @@ const Login = observer(() => {
           className={style.emailFormItem}
           validateTrigger={[CAMEL_ON_BLUR]}
           rules={[
-            { type: LOWER_EMAIL, message: `${CAP_EMAIL} ${LOWER_NOT_VALID}` },
-            { required: true, message: CAP_EMAIL + " " + LOWER_IS_REQUIRED },
+            { required: true, message: CAP_USER_NAME + " " + LOWER_IS_REQUIRED },
           ]}
         >
           <CommonInput
-            placeholder={EMAIL_PLACE_HOLDER}
+            placeholder={CAP_USER_NAME}
             variant={LOWER_DARK}
             inputType={LOWER_TEXT}
             prefix={<img src={DarkUserLogo} alt="" />}
@@ -81,7 +88,7 @@ const Login = observer(() => {
         </Form.Item>
         <Form.Item
           className={style.passwordFormItem}
-          name={CAMEL_PASSWORD}
+          name={LOWER_PASSWORD}
           rules={[{ required: true }]}
         >
           <CommonInput
@@ -99,7 +106,7 @@ const Login = observer(() => {
             className={style.loginBtn}
             htmlType={LOWER_SUBMIT}
             loading={isLoading}
-            title="Login"
+            title={CAP_LOGIN}
            />
         </Form.Item>
       </Form>

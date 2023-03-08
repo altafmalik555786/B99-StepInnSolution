@@ -12,13 +12,15 @@ export const LOWER_OFF = "off"
 export const LOWER_EMAIL = "email"
 export const CAMEL_ON_BLUR = "onBlur"
 export const LOWER_LABLE_BETWEEN_MIN_MAX = "${label} must be between ${min} and ${max}"
-export const EMAIL_PLACE_HOLDER = "name@domain.com"
+export const CAP_USER_NAME = "Username"
 export const LOWER_DARK = "dark"
 export const LOWER_LIGHT = "light"
 export const LOWER_TRANSPARENT = "transparent"
 export const LOWER_PASSWORD = 'password'
 export const CAMEL_PASSWORD = 'Password'
 export const LOWER_TEXT = "text"
+export const LOWER_ERROR = "error"
+export const LOWER_TOKEN = "token"
 
 
 //// TEXT CONSTANTS ////
@@ -31,7 +33,7 @@ export const CAP_LOGO = "Logo"
 export const LOWER_NOT_VALID = "is not a valid"
 export const LOWER_IS_REQUIRED = "is required"
 export const LOWER_LABLE_REQUIRED = "${label} " + LOWER_IS_REQUIRED;
-export const LOWER_LABEL_NOT_VALID =  "${label} " + LOWER_NOT_VALID
+export const LOWER_LABEL_NOT_VALID = "${label} " + LOWER_NOT_VALID
 export const CAP_EMAIL = "Email"
 export const LOWER_NUMBER = "number"
 export const LOWER_TEXT_AREA = "textarea"

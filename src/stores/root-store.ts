@@ -1,11 +1,11 @@
 // import makeInspectable from "mobx-devtools-mst";
 import { applySnapshot, getSnapshot, Instance, types } from "mobx-state-tree";
 import { useMemo } from "react";
-import { initLocationDetails, locationDetails } from "./location/location";
+import { initUser, user } from "./user/user";
 
 const RootStore = types
   .model({
-    locationDetails: locationDetails,
+    user: user,
   })
   .actions((self) => {
     let initialState = {};
@@ -31,7 +31,7 @@ export function initializeStore(snapshot = null) {
   const _store =
     store ??
     RootStore.create({
-      locationDetails: initLocationDetails(),
+      user: initUser(),
     });
   if (snapshot) {
     applySnapshot(_store, snapshot);

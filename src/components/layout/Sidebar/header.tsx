@@ -15,14 +15,15 @@ import { Popover, Button } from "antd";
 import BellIconDark from '@assets/icons/bell-icon-dark.png'
 import ProfileImage from "@assets/images/profile-image.png";
 import SettingLight from '@assets/icons/setting-light.png'
+import { LOWER_TOKEN } from "@utils/const";
 
 const Header = observer(({ setCollapsed, collapsed }: any) => {
 
   const navigate = useNavigate();
   const onLogout = () => {
     localStorage.setItem("userRegister", "true");
-    localStorage.removeItem("token");
-    navigate("login");
+    localStorage.removeItem(LOWER_TOKEN);
+    navigate(constRoute.login);
   };
   const data = useWindowSize().width;
 
@@ -31,6 +32,13 @@ const Header = observer(({ setCollapsed, collapsed }: any) => {
       setCollapsed(true);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (!localStorage.getItem(LOWER_TOKEN)) {
+      navigate(constRoute.login);
+    }
+  }, [])
+  
 
   const dropdownMenu = (
     <Menu className="nav-dropdown">

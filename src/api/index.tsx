@@ -1,2 +1,2 @@
-import LocationApi from "./location/location";
-export const locationApi = new LocationApi();
+import UserApi from "./user/user";
+export const userApi = new UserApi();

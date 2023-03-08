@@ -26,7 +26,9 @@ const PrivateLayout = observer(() => {
       </Sider>
       <Layout>
         <Header setCollapsed={setCollapsed} collapsed={collapsed} />
-        <Routing />
+        <div className={style.routingPagesContainer}>
+          <Routing />
+        </div>
       </Layout>
     </Layout>
   );

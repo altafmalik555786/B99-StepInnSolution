@@ -7,7 +7,6 @@ import CustomButton from "@components/common-components/custom-button";
 
 import {
   CAMEL_ON_BLUR,
-  CAP_EMAIL,
   CAP_LOGO,
   INITIAL_VALUES,
   LOWER_BASIC,
@@ -29,8 +28,8 @@ import {
 } from "@utils/const";
 import { Form } from "antd";
 import { CommonInput } from "@components/common-components/input";
-import DarkUserLogo from "@assets/icons/dark-user-logo.png"
-import DarkLock from "@assets/icons/dark-lock.png"
+import DarkUserLogo from "@assets/icons/dark-user-logo.png";
+import DarkLock from "@assets/icons/dark-lock.png";
 import { useStore } from "@stores/root-store";
 import { useNavigate } from "react-router-dom";
 
@@ -47,16 +46,18 @@ const validateMessages = {
 
 const Login = observer(() => {
   const [form] = Form.useForm();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const { user: { onUserLoginInfo, isLoading } } = useStore(null)
+  const {
+    user: { onUserLoginInfo, isLoading },
+  } = useStore(null);
 
   const onLogin = (values) => {
     const data = {
-      "password": values?.password,
-       "userName": values?.email
-   }
-    onUserLoginInfo(data, navigate)
+      password: values?.password,
+      userName: values?.email,
+    };
+    onUserLoginInfo(data, navigate);
   };
 
   const LoginForm = () => {
@@ -75,7 +76,10 @@ const Login = observer(() => {
           className={style.emailFormItem}
           validateTrigger={[CAMEL_ON_BLUR]}
           rules={[
-            { required: true, message: CAP_USER_NAME + " " + LOWER_IS_REQUIRED },
+            {
+              required: true,
+              message: CAP_USER_NAME + " " + LOWER_IS_REQUIRED,
+            },
           ]}
         >
           <CommonInput
@@ -107,7 +111,7 @@ const Login = observer(() => {
             htmlType={LOWER_SUBMIT}
             loading={isLoading}
             title={CAP_LOGIN}
-           />
+          />
         </Form.Item>
       </Form>
     );

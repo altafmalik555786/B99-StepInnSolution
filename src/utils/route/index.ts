@@ -4,6 +4,7 @@ export const constRoute = {
   login: "/login",
   forgotPassword: "/forgot-password",
   profile: "/profile",
+  users: "/users",
   soccer: '/soccer',
   tennis: '/tennis',
   cricket: '/cricket',

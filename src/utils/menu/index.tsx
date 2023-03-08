@@ -11,6 +11,11 @@ export const menusList = [
         link: constRoute.dashboard,
       },
       {
+        name: 'Users',
+        icon: MenuIcon.dashboard,
+        link: constRoute.users,
+      },
+      {
         name: 'Soccer',
         icon: MenuIcon.soccer,
         link: constRoute.soccer,

@@ -18,9 +18,13 @@ export const LOWER_DARK = "dark"
 export const LOWER_LIGHT = "light"
 export const LOWER_TRANSPARENT = "transparent"
 export const LOWER_PASSWORD = 'password'
-export const CAMEL_PASSWORD = 'Password'
+export const CAP_PASSWORD = 'Password'
 export const LOWER_TEXT = "text"
-
+export const LOWER_HORIZONTAL = "horizontal"
+export const LOWER_VERTICAL = "vertical"
+export const CAP_PHONE = "Phone"
+export const LOWER_PHONE = "phone"
+ 
 
 //// TEXT CONSTANTS ////
 export const CAP_SUBMIT = "Submit";

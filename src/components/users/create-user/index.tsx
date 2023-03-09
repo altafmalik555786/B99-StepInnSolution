@@ -49,7 +49,7 @@ import {
   LOWER_REFERENCE,
   NUM_STR_0,
   NUM_STR_85,
-} from "./const";
+} from "../const";
 import TextArea from "antd/es/input/TextArea";
 import { constRoute } from "@utils/route";
 

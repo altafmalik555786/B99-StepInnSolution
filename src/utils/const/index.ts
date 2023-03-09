@@ -40,13 +40,15 @@ export const CAP_EMAIL = "Email"
 export const LOWER_NUMBER = "number"
 export const LOWER_TEXT_AREA = "textarea"
 export const CAP_LOGIN = "Login"
+
 export const UPPER_O_BET = "OBET"
 export const LOWER_ERROR = "error"
 export const LOWER_TOKEN = "token"
 export const CAP_CREATE = "Create";
 export const CAP_NEW = "New";
-export const CAP_USER = "User"
+export const CAP_USER = "User";
 export const CAP_CREATE_NEW = CAP_CREATE + " " + CAP_NEW
+
 export const CAP_SHARE = "Share"
 export const LOWER_SHARE = "share"
 export const CAP_BETTOR = "Bettor"
@@ -62,5 +64,7 @@ export const LOWER_NOTES = "notes"
 export const LOWER_MUST_BE_GREATER_THAN = "must be greater than"
 export const LOWER_MUST_BE_LESS_THAN = "must be less than"
 export const CAMEL_USER_TYPE = "userType"
+export const CAP_ACCOUNT = "Accounts"
+export const CAP_COMMISSION = "Commission"
 
 

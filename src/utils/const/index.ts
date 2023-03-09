@@ -48,5 +48,9 @@ export const CAP_CREATE = "Create";
 export const CAP_NEW = "New";
 export const CAP_USER = "User"
 export const CAP_CREATE_NEW = CAP_CREATE + " " + CAP_NEW
+export const CAP_SHARE = "Share"
+export const LOWER_SHARE = "share"
+export const LOWER_MUST_BE_GREATER_THAN = "must be greater than"
+export const LOWER_MUST_BE_LESS_THAN = "must be less than"
 
 

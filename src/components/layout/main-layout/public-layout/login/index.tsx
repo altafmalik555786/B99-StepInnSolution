@@ -21,7 +21,7 @@ import {
   CAP_USER_NAME,
   LOWER_DARK,
   LOWER_TEXT,
-  CAMEL_PASSWORD,
+  CAP_PASSWORD,
   LOWER_PASSWORD,
   LOWER_SUBMIT,
   CAP_LOGIN,
@@ -99,7 +99,7 @@ const Login = observer(() => {
             variant={LOWER_DARK}
             inputType={LOWER_PASSWORD}
             prefix={<img src={DarkLock} alt="" />}
-            placeholder={CAMEL_PASSWORD}
+            placeholder={CAP_PASSWORD}
             onInput={(e) => {
               e.target.value = e.target.value.trim();
             }}

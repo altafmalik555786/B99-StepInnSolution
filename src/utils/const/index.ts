@@ -18,9 +18,13 @@ export const LOWER_DARK = "dark"
 export const LOWER_LIGHT = "light"
 export const LOWER_TRANSPARENT = "transparent"
 export const LOWER_PASSWORD = 'password'
-export const CAMEL_PASSWORD = 'Password'
+export const CAP_PASSWORD = 'Password'
 export const LOWER_TEXT = "text"
-
+export const LOWER_HORIZONTAL = "horizontal"
+export const LOWER_VERTICAL = "vertical"
+export const CAP_PHONE = "Phone"
+export const LOWER_PHONE = "phone"
+ 
 
 //// TEXT CONSTANTS ////
 export const CAP_SUBMIT = "Submit";
@@ -46,4 +50,9 @@ export const CAP_NEW = "New";
 export const CAP_USER = "User";
 export const CAP_CREATE_NEW = CAP_CREATE + " " + CAP_NEW
 export const USER_LIST = "Report Type";
+export const CAP_SHARE = "Share"
+export const LOWER_SHARE = "share"
+export const LOWER_MUST_BE_GREATER_THAN = "must be greater than"
+export const LOWER_MUST_BE_LESS_THAN = "must be less than"
+
 

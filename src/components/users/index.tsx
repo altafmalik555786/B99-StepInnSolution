@@ -1,6 +1,6 @@
 import {
   CAMEL_ON_BLUR,
-  CAMEL_PASSWORD,
+  CAP_PASSWORD,
   CAP_CREATE_NEW,
   CAP_SUBMIT,
   CAP_USER,
@@ -8,6 +8,7 @@ import {
   INITIAL_VALUES,
   LOWER_BASIC,
   LOWER_EMAIL,
+  LOWER_HORIZONTAL,
   LOWER_IS_REQUIRED,
   LOWER_LABEL_NOT_VALID,
   LOWER_LABLE_BETWEEN_MIN_MAX,
@@ -19,8 +20,14 @@ import {
   LOWER_TEXT,
   LOWER_TRANSPARENT,
   LOWER_USER_NAME,
+  CAP_PHONE,
+  LOWER_PHONE,
+  CAP_SHARE,
+  LOWER_SHARE,
+  LOWER_MUST_BE_LESS_THAN,
+  LOWER_MUST_BE_GREATER_THAN,
 } from "@utils/const";
-import React, { memo, useCallback } from "react";
+import { memo, useCallback } from "react";
 import style from "./style.module.scss";
 import { Col, Form, Row } from "antd";
 import { observer } from "mobx-react";
@@ -28,6 +35,7 @@ import { CommonInput } from "@components/common-components/input";
 import { useStore } from "@stores/root-store";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "@components/common-components/custom-button";
+import { CAP_DOWNLINE, CAP_REFERENCE, LOWER_REFERENCE } from "./const";
 
 const validateMessages = {
   required: LOWER_LABLE_REQUIRED,
@@ -53,69 +61,129 @@ const Users = observer(() => {
   }, []);
 
   return (
-    <div className={style.usersContainer}>
-      <Row>
-        <Col span={24}>
-          <div className={style.userHeader}>
-            <h4>{CAP_CREATE_NEW + CAP_USER} </h4>
-          </div>
-        </Col>
-      </Row>
-      <Row>
-        <Col span={12}>
+    <div className={style.usersContainerLayout}>
+      <div className={style.usersContainer}>
+        <Row>
+          <Col span={24}>
+            <div className={style.userHeader}>
+              <h4>{CAP_CREATE_NEW + CAP_USER} </h4>
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={12}>
+            <Form
+              form={form}
+              name={LOWER_BASIC}
+              initialValues={INITIAL_VALUES}
+              onFinish={onSubmit}
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 16 }}
+              layout={LOWER_HORIZONTAL}
+              autoComplete={LOWER_OFF}
+              validateMessages={validateMessages}
+              className={style.userForm}
+            >
+              <Form.Item
+                name={LOWER_USER_NAME}
+                label={CAP_USER_NAME}
+                className={style.emailFormItem}
+                validateTrigger={[CAMEL_ON_BLUR]}
+                rules={[
+                  {
+                    required: true,
+                    message: CAP_USER_NAME + " " + LOWER_IS_REQUIRED,
+                  },
+                ]}
+              >
+                <CommonInput
+                  variant={LOWER_TRANSPARENT}
+                  inputType={LOWER_TEXT}
+                  onFocus={() =>
+                    form.setFields([{ name: LOWER_EMAIL, errors: [] }])
+                  }
+                />
+              </Form.Item>
+              <Form.Item
+                className={style.passwordFormItem}
+                label={CAP_PASSWORD}
+                name={LOWER_PASSWORD}
+                rules={[{ required: true }]}
+              >
+                <CommonInput
+                  variant={LOWER_TRANSPARENT}
+                  inputType={LOWER_PASSWORD}
+                  onInput={(e) => {
+                    e.target.value = e.target.value.trim();
+                  }}
+                />
+              </Form.Item>
+              <Form.Item label={CAP_REFERENCE} name={LOWER_REFERENCE}>
+                <CommonInput
+                  variant={LOWER_TRANSPARENT}
+                  inputType={LOWER_TEXT}
+                  onInput={(e) => {
+                    e.target.value = e.target.value.trim();
+                  }}
+                />
+              </Form.Item>
+              <Form.Item label={CAP_PHONE} name={LOWER_PHONE}>
+                <CommonInput
+                  variant={LOWER_TRANSPARENT}
+                  inputType={LOWER_TEXT}
+                  onInput={(e) => {
+                    e.target.value = e.target.value.trim();
+                  }}
+                />
+              </Form.Item>
+              <Form.Item
+                label={`${CAP_DOWNLINE} ${CAP_SHARE}`}
+                name={"downlineShare"}
+                rules={[
+                  { required: true },
+                  {
+                    max: 85,
+                    message: `${CAP_DOWNLINE} ${LOWER_SHARE} ${LOWER_MUST_BE_LESS_THAN} 85`,
+                  },
+                  {
+                    min: 0,
+                    message: `${CAP_DOWNLINE} ${LOWER_SHARE} ${LOWER_MUST_BE_GREATER_THAN} 0`,
+                  }
+                ]}
+              >
+                <CommonInput
+                  variant={LOWER_TRANSPARENT}
+                  inputType={LOWER_NUMBER}
+                  min={"0"}
+                  max={"85"}
+                  onInput={(e) => {
+                    e.target.value = e.target.value.trim();
+                  }}
+                />
+              </Form.Item>
+            </Form>
+          </Col>
+        </Row>
+        <div className={style.userFooter}>
           <Form
             form={form}
             name={LOWER_BASIC}
             initialValues={INITIAL_VALUES}
-            onFinish={onSubmit}
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
+            layout={LOWER_HORIZONTAL}
             autoComplete={LOWER_OFF}
             validateMessages={validateMessages}
-            className={style.loginPanelForm}
           >
-            <Form.Item
-              name={LOWER_USER_NAME}
-              className={style.emailFormItem}
-              validateTrigger={[CAMEL_ON_BLUR]}
-              rules={[
-                {
-                  required: true,
-                  message: CAP_USER_NAME + " " + LOWER_IS_REQUIRED,
-                },
-              ]}
-            >
-              <CommonInput
-                variant={LOWER_TRANSPARENT}
-                inputType={LOWER_TEXT}
-                onFocus={() =>
-                  form.setFields([{ name: LOWER_EMAIL, errors: [] }])
-                }
-              />
-            </Form.Item>
-            <Form.Item
-              className={style.passwordFormItem}
-              name={LOWER_PASSWORD}
-              rules={[{ required: true }]}
-            >
-              <CommonInput
-                variant={LOWER_TRANSPARENT}
-                inputType={LOWER_PASSWORD}
-                onInput={(e) => {
-                  e.target.value = e.target.value.trim();
-                }}
-              />
-            </Form.Item>
-            <Form.Item>
-              <CustomButton
-                className={style.loginBtn}
-                htmlType={LOWER_SUBMIT}
-                loading={isLoading}
-                title={CAP_SUBMIT}
-              />
-            </Form.Item>
+            <CustomButton
+              className={style.submitBtn}
+              htmlType={LOWER_SUBMIT}
+              loading={isLoading}
+              title={CAP_SUBMIT}
+            />
           </Form>
-        </Col>
-      </Row>
-      <div className={style.userFooter}></div>
+        </div>
+      </div>
     </div>
   );
 });

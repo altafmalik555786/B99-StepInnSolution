@@ -17,7 +17,6 @@ import ProfileImage from "@assets/images/profile-image.png";
 import SettingLight from "@assets/icons/setting-light.png";
 import { LOWER_TOKEN, UPPER_O_BET } from "@utils/const";
 import useFitText from "use-fit-text";
-import { useStore } from "@stores/root-store";
 
 const Header = observer(({ setCollapsed, collapsed }: any) => {
   const { fontSize, ref } = useFitText();

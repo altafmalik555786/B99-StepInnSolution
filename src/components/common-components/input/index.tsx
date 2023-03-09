@@ -153,6 +153,7 @@ export const CommonInput: React.FC<CommonInputProps> = (
           readOnly={props.readOnly}
           ref={props.ref}
           max={props.max}
+          min={props.min}
           onWheel={!props.incrementOnWheel ? event => event.currentTarget.blur() : () => null}
           className={classnames(
             {

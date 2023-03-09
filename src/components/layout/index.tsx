@@ -1,5 +1,4 @@
 import { useLocation } from 'react-router-dom'
-import React from 'react'
 import { observer } from 'mobx-react-lite'
 import { constRoute } from '@utils/route'
 import PrivateLayout from './main-layout/private-layout'

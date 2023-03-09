@@ -1,0 +1,9 @@
+@import '@assets/styles/colors';
+
+.titleBarContainer{
+    width: 100%;
+    height: 54px;
+    color: $dark-color-white;
+    background-color: $dark-title-bar-green;
+    padding-left: 40px;
+}

@@ -1,34 +1,21 @@
-.usersContainer {
-    width: 100%;
-    height: 700px;
-    position: relative;
-    border-radius: 20px;
-    background-color: white;
+@import '@assets/styles/colors';
 
+.userListMainContainer {
 
-    .userHeader {
+    padding: 15px;
+
+    .userListContainer {
+        background-color: $dark-color-white;
+        border-radius: 0px 0px 15px 15px;
         width: 100%;
-        height: 54px;
-        background: #085845;
-        border-radius: 15px 15px 0px 0px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding-left: 20px;
-
-        h4 {
-            margin: 0;
-            color: #FFFFFF;
-            font-size: 16px;
-
-        }
+        height: 700px;
 
     }
 
+    // 
     .userFooter {
         width: 100%;
         position: absolute;
-        border-radius: 0px 0px 15px 15px;
         bottom: 0;
         background-color: green;
         height: 54px;
@@ -37,10 +24,6 @@
         flex-direction: column;
         justify-content: center;
         padding-left: 20px;
-
-        
     }
-}
-.form{
- margin-top: 10px;   
+
 }

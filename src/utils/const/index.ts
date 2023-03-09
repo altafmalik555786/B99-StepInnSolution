@@ -22,8 +22,7 @@ export const CAP_PASSWORD = 'Password'
 export const LOWER_TEXT = "text"
 export const LOWER_HORIZONTAL = "horizontal"
 export const LOWER_VERTICAL = "vertical"
-export const CAP_PHONE = "Phone"
-export const LOWER_PHONE = "phone"
+export const LOWER_CHECKED = "checked"
  
 
 //// TEXT CONSTANTS ////
@@ -50,7 +49,18 @@ export const CAP_USER = "User"
 export const CAP_CREATE_NEW = CAP_CREATE + " " + CAP_NEW
 export const CAP_SHARE = "Share"
 export const LOWER_SHARE = "share"
+export const CAP_BETTOR = "Bettor"
+export const LOWER_BETTOR = "bettor"
+export const CAP_SUPER_MASTER = "Super Master"
+export const CAMEL_SUPER_MASTER = "superMaster"
+export const CAP_TYPE = "Type"
+export const LOWER_TYPE = "type"
+export const CAP_PHONE = "Phone"
+export const LOWER_PHONE = "phone"
+export const CAP_NOTES = "Notes"
+export const LOWER_NOTES = "notes"
 export const LOWER_MUST_BE_GREATER_THAN = "must be greater than"
 export const LOWER_MUST_BE_LESS_THAN = "must be less than"
+export const CAMEL_USER_TYPE = "userType"
 
 

@@ -1,3 +1,6 @@
 export const CAP_REFERENCE = "Reference"
 export const LOWER_REFERENCE = "reference"
 export const CAP_DOWNLINE = "Donwline"
+export const CAMEL_IS_ACTIVE ="isActive"
+export const NUM_STR_85 = "85"
+export const NUM_STR_0 = "0"

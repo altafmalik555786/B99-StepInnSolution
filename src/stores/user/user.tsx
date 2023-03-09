@@ -1,4 +1,4 @@
-import { flow, types } from "mobx-state-tree";
+import { cast, flow, types } from "mobx-state-tree";
 import { userApi } from "../../api";
 import { notification } from "../../utils/notifications";
 import { toJS } from 'mobx'
@@ -9,25 +9,32 @@ import { LOWER_TOKEN } from "@utils/const";
 export const userData = types.model({
   role: types.maybeNull(types.union(types.string, types.number)),
   userName: types.maybeNull(types.string),
+  userId: types.maybeNull(types.number),
+  balance: types.maybeNull(types.number),
 })
 
 export const user = types
 
   .model({
+    userLoginData: types.maybeNull(userData),
     userInfo: types.maybeNull(userData),
-    data: types.maybeNull(types.array(types.string)),
     loading: types.optional(types.boolean, false),
+    loadingCreatUser: types.optional(types.boolean, false),
     count: types.maybeNull(types.number),
   })
   .views((self) => ({
     get getUserInfo() {
-      return toJS(self.userInfo);
+      return toJS(self.userLoginData);
     },
     get isLoading() {
       return self.loading;
     },
+    get isLoadingCreateUser() {
+      return self.loadingCreatUser;
+    },
   }))
   .actions((self) => {
+    
     const onUserLoginInfo = flow(function* (data, navigate) {
       self.loading = true;
       try {
@@ -35,12 +42,15 @@ export const user = types
         if (res?.success) {
           const userData = {
             role: res?.role,
-            userName: res?.userName
+            userName: res?.userName,
+            userId: res?.userId,
+            balance: res?.balance
           }
-          self.userInfo = userData;
+          self.userLoginData = userData;
           localStorage.setItem(LOWER_TOKEN, res?.token)
           notification.success(res?.message);
           navigate(`${constRoute.dashboard}`)
+          loadUserInfo()
         }
       } catch (error) {
         catchApiError(error, "onUserLoginInfo")
@@ -49,24 +59,38 @@ export const user = types
       }
     });
 
-    const loadUserInfo = flow(function* (num = 1) {
+  
+    const createUser = flow(function* (data) {
+      self.loadingCreatUser = true;
+      let response = null;
+      try {
+        const res = yield userApi.onCreateUser(data);
+        response = res
+      } catch (error) {
+        catchApiError(error, "createUser")
+      } finally {
+        self.loadingCreatUser = false;
+        return response
+      }
+    });
+
+    const loadUserInfo = flow(function* () {
       self.loading = true;
       try {
         self.loading = true;
-        const res = yield userApi.getUserDetails(num);
-        self.data = res.results;
-        self.count = res.count;
+        const res = yield userApi.getCurrentUserDetails();
       } catch (error) {
-        catchApiError(error)
+        catchApiError(error, "loadUserInfo")
       } finally {
         self.loading = false;
       }
     });
+
     const updateClientDetails = flow(function* (data, recordId) {
       try {
         self.loading = true;
         const res = yield userApi.updateUserDetails(data, recordId);
-        self.data = res;
+        self.userLoginData = res;
         notification.info("User Updated Successfully");
       } catch (error) {
         console.log("error", error);
@@ -78,7 +102,7 @@ export const user = types
       try {
         self.loading = true;
         const res = yield userApi.deleteUserDetails(id);
-        self.data = res.results;
+        self.userLoginData = res.results;
         notification.info("User Deleted Successfully");
       } catch (error) {
         catchApiError(error)
@@ -91,6 +115,7 @@ export const user = types
       loadUserInfo,
       deleteUserDetails,
       updateClientDetails,
+      createUser,
     };
   });
 

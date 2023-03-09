@@ -54,5 +54,8 @@ export const CAP_SHARE = "Share"
 export const LOWER_SHARE = "share"
 export const LOWER_MUST_BE_GREATER_THAN = "must be greater than"
 export const LOWER_MUST_BE_LESS_THAN = "must be less than"
+export const CAP_TYPE = "Type"
+export const CAP_ACCOUNT = "Accounts"
+export const CAP_COMMISSION = "Commission"
 
 

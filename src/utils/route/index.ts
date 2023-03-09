@@ -5,6 +5,7 @@ export const constRoute = {
   forgotPassword: "/forgot-password",
   profile: "/profile",
   users: "/users",
+  createUser: "/create-user",
   soccer: '/soccer',
   tennis: '/tennis',
   cricket: '/cricket',
@@ -18,7 +19,8 @@ export const constRoute = {
   allSports: '/all-sports',
   results: '/results',
   marketRules: '/market-rules',
-  termsAndConditions: '/terms-and-conditions'
+  termsAndConditions: '/terms-and-conditions',
+  userList: '/user-list'
 
 
 };

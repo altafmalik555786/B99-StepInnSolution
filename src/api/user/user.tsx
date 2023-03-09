@@ -6,9 +6,9 @@ import { BaseApi } from "../baseApi";
 class UserApi extends BaseApi {
   onUserLogin = async (data) => {
     try {
-      const response = await axios.post(`${baseUrl}login/`, data, {
-        headers: { 
-          'Content-Type': 'application/json'
+      const response = await axios.post(`${baseUrl}login`, data, {
+        headers: {
+          "Content-Type": "application/json",
         },
         cancelToken: this.cancelToken,
       });
@@ -18,10 +18,25 @@ class UserApi extends BaseApi {
     }
   };
 
-  getUserDetails = async (num = 1) => {
+  onCreateUser = async (data) => {
+    try {
+      const response = await axios.post(`${baseUrl}register`, data, {
+        headers: {
+          Authorization: getAuthorizationHeader(),
+          "Content-Type": "application/json",
+        },
+        cancelToken: this.cancelToken,
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  getCurrentUserDetails = async () => {
     try {
       const response = await axios.get(
-        `${baseUrl}user/?page=${num ? num : 1}`,
+        `${baseUrl}getCurrentUser`,
         {
           headers: { Authorization: getAuthorizationHeader() },
           cancelToken: this.cancelToken,
@@ -35,14 +50,10 @@ class UserApi extends BaseApi {
   };
   updateUserDetails = async (data, recordId) => {
     try {
-      const response = await axios.patch(
-        `${baseUrl}user/${recordId}/`,
-        data,
-        {
-          headers: { Authorization: getAuthorizationHeader() },
-          cancelToken: this.cancelToken,
-        }
-      );
+      const response = await axios.patch(`${baseUrl}user/${recordId}/`, data, {
+        headers: { Authorization: getAuthorizationHeader() },
+        cancelToken: this.cancelToken,
+      });
 
       return response.data;
     } catch (error) {

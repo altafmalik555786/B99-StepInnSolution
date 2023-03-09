@@ -26,16 +26,32 @@ import {
   LOWER_SHARE,
   LOWER_MUST_BE_LESS_THAN,
   LOWER_MUST_BE_GREATER_THAN,
+  CAP_NOTES,
+  LOWER_NOTES,
+  LOWER_CHECKED,
+  CAP_SUPER_MASTER,
+  CAP_BETTOR,
+  CAP_TYPE,
+  CAMEL_USER_TYPE,
 } from "@utils/const";
 import { memo, useCallback } from "react";
 import style from "./style.module.scss";
-import { Col, Form, Row } from "antd";
+import { Checkbox, Col, Form, Radio, Row } from "antd";
 import { observer } from "mobx-react";
 import { CommonInput } from "@components/common-components/input";
 import { useStore } from "@stores/root-store";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "@components/common-components/custom-button";
-import { CAP_DOWNLINE, CAP_REFERENCE, LOWER_REFERENCE } from "./const";
+import {
+  CAMEL_IS_ACTIVE,
+  CAP_DOWNLINE,
+  CAP_REFERENCE,
+  LOWER_REFERENCE,
+  NUM_STR_0,
+  NUM_STR_85,
+} from "../const";
+import TextArea from "antd/es/input/TextArea";
+import { constRoute } from "@utils/route";
 
 const validateMessages = {
   required: LOWER_LABLE_REQUIRED,
@@ -53,12 +69,24 @@ const Users = observer(() => {
   const navigate = useNavigate();
 
   const {
-    user: { isLoading },
+    user: { createUser, isLoadingCreateUser },
   } = useStore(null);
 
-  const onSubmit = useCallback((values) => {
-    console.log("values", values);
+  const onSubmit = useCallback( async (values) => {
+    const payload = {
+      role: values.userType,
+      password: values?.password,
+      userName: values?.userName,
+      reference: values?.reference,
+      phone: values?.phone,
+      notes: values?.notes,
+      isActive: values.isActive,
+      balance: 5000
+    }
+   const res =  await createUser(payload)
+   res.success && navigate(constRoute.dashboard)
   }, []);
+
 
   return (
     <div className={style.usersContainerLayout}>
@@ -77,6 +105,7 @@ const Users = observer(() => {
               name={LOWER_BASIC}
               initialValues={INITIAL_VALUES}
               onFinish={onSubmit}
+              onValuesChange={(e) => console.log("e.target.value", e)}
               labelCol={{ span: 8 }}
               wrapperCol={{ span: 16 }}
               layout={LOWER_HORIZONTAL}
@@ -108,7 +137,7 @@ const Users = observer(() => {
                 className={style.passwordFormItem}
                 label={CAP_PASSWORD}
                 name={LOWER_PASSWORD}
-                rules={[{ required: true }]}
+                rules={[{ required: true,  }]}
               >
                 <CommonInput
                   variant={LOWER_TRANSPARENT}
@@ -118,16 +147,31 @@ const Users = observer(() => {
                   }}
                 />
               </Form.Item>
-              <Form.Item label={CAP_REFERENCE} name={LOWER_REFERENCE}>
+              <Form.Item label={CAP_REFERENCE} name={LOWER_REFERENCE}  
+               rules={[
+                {
+                  required: true,
+                  message: CAP_REFERENCE + " " + LOWER_IS_REQUIRED,
+                },
+              ]}
+              >
                 <CommonInput
                   variant={LOWER_TRANSPARENT}
                   inputType={LOWER_TEXT}
                   onInput={(e) => {
                     e.target.value = e.target.value.trim();
                   }}
+                  
                 />
               </Form.Item>
-              <Form.Item label={CAP_PHONE} name={LOWER_PHONE}>
+              <Form.Item label={CAP_PHONE} name={LOWER_PHONE}
+               rules={[
+                {
+                  required: true,
+                  message: CAP_PHONE + " " + LOWER_IS_REQUIRED,
+                },
+              ]}
+              >
                 <CommonInput
                   variant={LOWER_TRANSPARENT}
                   inputType={LOWER_TEXT}
@@ -142,13 +186,13 @@ const Users = observer(() => {
                 rules={[
                   { required: true },
                   {
-                    max: 85,
-                    message: `${CAP_DOWNLINE} ${LOWER_SHARE} ${LOWER_MUST_BE_LESS_THAN} 85`,
+                    max: Number(NUM_STR_85),
+                    message: `${CAP_DOWNLINE} ${LOWER_SHARE} ${LOWER_MUST_BE_LESS_THAN} ${NUM_STR_85}`,
                   },
                   {
-                    min: 0,
-                    message: `${CAP_DOWNLINE} ${LOWER_SHARE} ${LOWER_MUST_BE_GREATER_THAN} 0`,
-                  }
+                    min: Number(NUM_STR_0),
+                    message: `${CAP_DOWNLINE} ${LOWER_SHARE} ${LOWER_MUST_BE_GREATER_THAN} ${NUM_STR_0}`,
+                  },
                 ]}
               >
                 <CommonInput
@@ -161,12 +205,50 @@ const Users = observer(() => {
                   }}
                 />
               </Form.Item>
+              <Form.Item label={CAP_NOTES} name={LOWER_NOTES}
+              rules={[
+                {
+                  required: true,
+                  message: CAP_NOTES + " " + LOWER_IS_REQUIRED,
+                },
+              ]}
+              >
+                <TextArea />
+              </Form.Item>
+              <Form.Item name={CAMEL_USER_TYPE} label={CAP_TYPE} 
+              rules={[
+                {
+                  required: true,
+                  message: CAP_TYPE + " " + LOWER_IS_REQUIRED,
+                },
+              ]}
+              >
+                <Radio.Group>
+                  <Radio value={"1"}>{CAP_SUPER_MASTER}</Radio>
+                  <Radio value={"5"}>{CAP_BETTOR}</Radio>
+                </Radio.Group>
+              </Form.Item>
+              <Form.Item
+                name={CAMEL_IS_ACTIVE}
+                label={CAMEL_IS_ACTIVE}
+                valuePropName={LOWER_CHECKED}
+                rules={[
+                  {
+                    required: true,
+                    message: CAMEL_IS_ACTIVE + " " + LOWER_IS_REQUIRED,
+                  },
+                ]}
+              >
+                <Checkbox></Checkbox>
+              </Form.Item>
             </Form>
           </Col>
         </Row>
         <div className={style.userFooter}>
           <Form
             form={form}
+            onFinish={onSubmit}
+            onValuesChange={(e) => console.log("e.target.value", e)}
             name={LOWER_BASIC}
             initialValues={INITIAL_VALUES}
             labelCol={{ span: 8 }}
@@ -178,7 +260,7 @@ const Users = observer(() => {
             <CustomButton
               className={style.submitBtn}
               htmlType={LOWER_SUBMIT}
-              loading={isLoading}
+              loading={isLoadingCreateUser}
               title={CAP_SUBMIT}
             />
           </Form>

@@ -18,7 +18,8 @@ export const constRoute = {
   allSports: '/all-sports',
   results: '/results',
   marketRules: '/market-rules',
-  termsAndConditions: '/terms-and-conditions'
+  termsAndConditions: '/terms-and-conditions',
+  userList: '/user-list'
 
 
 };

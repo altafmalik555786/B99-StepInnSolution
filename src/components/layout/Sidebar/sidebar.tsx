@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { Menu } from "antd";
 import { NavLink, useLocation } from "react-router-dom";
 import style from "../style.module.scss";
 import { menusList } from "@utils/menu";
 import Logo from "@assets/icons/logo.png";
-import { UPPER_O_BET } from "@utils/const";
+import { LOWER_DARK, UPPER_O_BET } from "@utils/const";
+import { observer } from "mobx-react";
 
-const Sidebar = ({ collapsed }: any) => {
-
+const Sidebar = observer(({ collapsed }: any) => {
   const [activeElement, setActiveElement] = useState("");
   const location = useLocation();
 
@@ -15,11 +15,13 @@ const Sidebar = ({ collapsed }: any) => {
     setActiveElement(location?.pathname);
   }, [location?.pathname]);
 
+  
+
   const menuList = menusList ?? [];
 
   menuList?.map((item) => {
     item?.menu?.map((menuItem, index) => {
-      if (menuItem.name === "Leave Approval") {
+      if (menuItem.name === "role not allowed add here") {
         item.menu.splice(index, 1);
       }
       return null;
@@ -30,7 +32,7 @@ const Sidebar = ({ collapsed }: any) => {
   return (
     <Menu
       className={style.mainMenu}
-      theme="dark"
+      theme={LOWER_DARK}
       mode="inline"
       inlineCollapsed={collapsed}
       selectedKeys={[window?.location?.pathname]}
@@ -38,9 +40,9 @@ const Sidebar = ({ collapsed }: any) => {
     >
       <div className={style.brandLogo}>
         <img src={Logo} alt="Logo" />
-          <h1>
-            1<i>{UPPER_O_BET}</i>
-          </h1>
+        <h1>
+          1<i>{UPPER_O_BET}</i>
+        </h1>
       </div>
 
       {menuList.map((val, key1) => {
@@ -55,7 +57,7 @@ const Sidebar = ({ collapsed }: any) => {
               }
               key={`submenu-${key1.toString()}-${key2.toString()}`}
               icon={
-                <img style={{ width: "18px", height: "18px" }} src={Icon} />
+                <img style={{ width: "18px", height: "18px" }} alt="" src={Icon} />
               }
             >
               <NavLink
@@ -80,6 +82,6 @@ const Sidebar = ({ collapsed }: any) => {
       })}
     </Menu>
   );
-};
+});
 
-export default Sidebar;
+export default memo(Sidebar);

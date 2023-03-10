@@ -1,5 +1,5 @@
 import { constRoute } from "@utils/route";
-import React, { Component, memo } from "react";
+import { memo } from "react";
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "@components/dashboard/index";
 import Login from "@components/layout/main-layout/public-layout/login";

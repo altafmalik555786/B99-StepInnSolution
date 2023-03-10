@@ -29,12 +29,12 @@ import {
   CAP_NOTES,
   LOWER_NOTES,
   LOWER_CHECKED,
-  CAP_SUPER_MASTER,
-  CAP_BETTOR,
   CAP_TYPE,
   CAMEL_USER_TYPE,
+  CAP_BALANCE,
+  LOWER_BALANCE,
 } from "@utils/const";
-import { memo, useCallback } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import style from "./style.module.scss";
 import { Checkbox, Col, Form, Radio, Row } from "antd";
 import { observer } from "mobx-react";
@@ -52,6 +52,7 @@ import {
 } from "../const";
 import TextArea from "antd/es/input/TextArea";
 import { constRoute } from "@utils/route";
+import { roleTypeOptionsList } from "../json-data";
 
 const validateMessages = {
   required: LOWER_LABLE_REQUIRED,
@@ -68,11 +69,13 @@ const Users = observer(() => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
+  const [userInfoData, setUserInfoData] = useState(null);
+
   const {
-    user: { createUser, isLoadingCreateUser },
+    user: { createUser, isLoadingCreateUser, getUserInfo },
   } = useStore(null);
 
-  const onSubmit = useCallback( async (values) => {
+  const onSubmit = useCallback(async (values) => {
     const payload = {
       role: values.userType,
       password: values?.password,
@@ -81,11 +84,20 @@ const Users = observer(() => {
       phone: values?.phone,
       notes: values?.notes,
       isActive: values.isActive,
-      balance: 5000
-    }
-   const res =  await createUser(payload)
-   res.success && navigate(constRoute.dashboard)
+      balance: values?.balance,
+    };
+    const res = await createUser(payload);
+    res.success && navigate(constRoute.users);
   }, []);
+
+  const roleTypeOptions = useMemo(
+    () => roleTypeOptionsList,
+    [roleTypeOptionsList]
+  );
+
+  useEffect(() => {
+    setUserInfoData(getUserInfo);
+  }, [getUserInfo]);
 
 
   return (
@@ -105,7 +117,6 @@ const Users = observer(() => {
               name={LOWER_BASIC}
               initialValues={INITIAL_VALUES}
               onFinish={onSubmit}
-              onValuesChange={(e) => console.log("e.target.value", e)}
               labelCol={{ span: 8 }}
               wrapperCol={{ span: 16 }}
               layout={LOWER_HORIZONTAL}
@@ -137,7 +148,7 @@ const Users = observer(() => {
                 className={style.passwordFormItem}
                 label={CAP_PASSWORD}
                 name={LOWER_PASSWORD}
-                rules={[{ required: true,  }]}
+                rules={[{ required: true }]}
               >
                 <CommonInput
                   variant={LOWER_TRANSPARENT}
@@ -147,13 +158,15 @@ const Users = observer(() => {
                   }}
                 />
               </Form.Item>
-              <Form.Item label={CAP_REFERENCE} name={LOWER_REFERENCE}  
-               rules={[
-                {
-                  required: true,
-                  message: CAP_REFERENCE + " " + LOWER_IS_REQUIRED,
-                },
-              ]}
+              <Form.Item
+                label={CAP_REFERENCE}
+                name={LOWER_REFERENCE}
+                rules={[
+                  {
+                    required: true,
+                    message: CAP_REFERENCE + " " + LOWER_IS_REQUIRED,
+                  },
+                ]}
               >
                 <CommonInput
                   variant={LOWER_TRANSPARENT}
@@ -161,20 +174,39 @@ const Users = observer(() => {
                   onInput={(e) => {
                     e.target.value = e.target.value.trim();
                   }}
-                  
                 />
               </Form.Item>
-              <Form.Item label={CAP_PHONE} name={LOWER_PHONE}
-               rules={[
-                {
-                  required: true,
-                  message: CAP_PHONE + " " + LOWER_IS_REQUIRED,
-                },
-              ]}
+              <Form.Item
+                label={CAP_PHONE}
+                name={LOWER_PHONE}
+                rules={[
+                  {
+                    required: true,
+                    message: CAP_PHONE + " " + LOWER_IS_REQUIRED,
+                  },
+                ]}
               >
                 <CommonInput
                   variant={LOWER_TRANSPARENT}
                   inputType={LOWER_TEXT}
+                  onInput={(e) => {
+                    e.target.value = e.target.value.trim();
+                  }}
+                />
+              </Form.Item>
+              <Form.Item
+                label={CAP_BALANCE}
+                name={LOWER_BALANCE}
+                rules={[
+                  {
+                    required: true,
+                    message: CAP_BALANCE + " " + LOWER_IS_REQUIRED,
+                  },
+                ]}
+              >
+                <CommonInput
+                  variant={LOWER_TRANSPARENT}
+                  inputType={LOWER_NUMBER}
                   onInput={(e) => {
                     e.target.value = e.target.value.trim();
                   }}
@@ -205,27 +237,40 @@ const Users = observer(() => {
                   }}
                 />
               </Form.Item>
-              <Form.Item label={CAP_NOTES} name={LOWER_NOTES}
-              rules={[
-                {
-                  required: true,
-                  message: CAP_NOTES + " " + LOWER_IS_REQUIRED,
-                },
-              ]}
+              <Form.Item
+                label={CAP_NOTES}
+                name={LOWER_NOTES}
+                rules={[
+                  {
+                    required: true,
+                    message: CAP_NOTES + " " + LOWER_IS_REQUIRED,
+                  },
+                ]}
               >
                 <TextArea />
               </Form.Item>
-              <Form.Item name={CAMEL_USER_TYPE} label={CAP_TYPE} 
-              rules={[
-                {
-                  required: true,
-                  message: CAP_TYPE + " " + LOWER_IS_REQUIRED,
-                },
-              ]}
+              <Form.Item
+                name={CAMEL_USER_TYPE}
+                label={CAP_TYPE}
+                rules={[
+                  {
+                    required: true,
+                    message: CAP_TYPE + " " + LOWER_IS_REQUIRED,
+                  },
+                ]}
               >
                 <Radio.Group>
-                  <Radio value={"1"}>{CAP_SUPER_MASTER}</Radio>
-                  <Radio value={"5"}>{CAP_BETTOR}</Radio>
+                  {roleTypeOptions?.length &&
+                    roleTypeOptions?.map((item, index) => {
+                      if (item.role > userInfoData?.role) {
+                        return (
+                          <Radio key={index} value={item?.role}>
+                            {item?.name}
+                          </Radio>
+                        );
+                      }
+                      return null
+                    })}
                 </Radio.Group>
               </Form.Item>
               <Form.Item
@@ -248,7 +293,6 @@ const Users = observer(() => {
           <Form
             form={form}
             onFinish={onSubmit}
-            onValuesChange={(e) => console.log("e.target.value", e)}
             name={LOWER_BASIC}
             initialValues={INITIAL_VALUES}
             labelCol={{ span: 8 }}

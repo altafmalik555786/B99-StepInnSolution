@@ -34,7 +34,7 @@ const CustomButton = (props: buttonProps) => {
       className={classNames(style.commonButton, props.className)}
       block={props.block}
       danger={props.danger}
-      disabled={props.disabled}
+      disabled={props.disabled || props.loading}
       ghost={props.ghost}
       href={props.href}
       htmlType={props.htmlType}

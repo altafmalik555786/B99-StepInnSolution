@@ -20,7 +20,6 @@ export const constRoute = {
   results: '/results',
   marketRules: '/market-rules',
   termsAndConditions: '/terms-and-conditions',
-  userList: '/user-list'
 
 
 };

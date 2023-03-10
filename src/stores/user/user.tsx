@@ -1,9 +1,9 @@
 import { cast, flow, types } from "mobx-state-tree";
 import { userApi } from "../../api";
 import { notification } from "../../utils/notifications";
-import { toJS } from 'mobx'
+import { toJS } from "mobx";
 import { constRoute } from "@utils/route";
-import { catchApiError } from "@utils/common-functions";
+import { catchApiError, onLogOutClearAll } from "@utils/common-functions";
 import { LOWER_TOKEN } from "@utils/const";
 
 export const userData = types.model({
@@ -11,20 +11,44 @@ export const userData = types.model({
   userName: types.maybeNull(types.string),
   userId: types.maybeNull(types.number),
   balance: types.maybeNull(types.number),
-})
+});
+
+export const userInfo = types.model({
+  balance: types.maybeNull(types.number),
+  bettingAllowed: types.maybeNull(types.boolean),
+  canSettlePL: types.maybeNull(types.boolean),
+  createdAt: types.maybeNull(types.number),
+  createdBy: types.maybeNull(types.string),
+  downLineShare: types.maybeNull(types.number),
+  isActive: types.maybeNull(types.boolean),
+  notes: types.maybeNull(types.string),
+  password: types.maybeNull(types.string),
+  passwordChanged: types.maybeNull(types.boolean),
+  phone: types.maybeNull(types.string),
+  reference: types.maybeNull(types.string),
+  role: types.maybeNull(types.union(types.string, types.number)),
+  status: types.maybeNull(types.number),
+  token: types.maybeNull(types.string),
+  updatedAt: types.maybeNull(types.number),
+  userId: types.maybeNull(types.number),
+  userName: types.maybeNull(types.string),
+});
 
 export const user = types
 
   .model({
     userLoginData: types.maybeNull(userData),
-    userInfo: types.maybeNull(userData),
+    userInfo: types.maybeNull(userInfo),
     loading: types.optional(types.boolean, false),
     loadingCreatUser: types.optional(types.boolean, false),
     count: types.maybeNull(types.number),
   })
   .views((self) => ({
-    get getUserInfo() {
+    get getUserLoginData() {
       return toJS(self.userLoginData);
+    },
+    get getUserInfo() {
+      return toJS(self.userInfo);
     },
     get isLoading() {
       return self.loading;
@@ -34,7 +58,6 @@ export const user = types
     },
   }))
   .actions((self) => {
-    
     const onUserLoginInfo = flow(function* (data, navigate) {
       self.loading = true;
       try {
@@ -44,45 +67,54 @@ export const user = types
             role: res?.role,
             userName: res?.userName,
             userId: res?.userId,
-            balance: res?.balance
-          }
+            balance: res?.balance,
+          };
           self.userLoginData = userData;
-          localStorage.setItem(LOWER_TOKEN, res?.token)
+          localStorage.setItem(LOWER_TOKEN, res?.token);
           notification.success(res?.message);
-          navigate(`${constRoute.dashboard}`)
-          loadUserInfo()
+          navigate(`${constRoute.dashboard}`);
         }
       } catch (error) {
-        catchApiError(error, "onUserLoginInfo")
+        catchApiError(error, "onUserLoginInfo");
       } finally {
         self.loading = false;
       }
     });
 
-  
     const createUser = flow(function* (data) {
       self.loadingCreatUser = true;
       let response = null;
       try {
         const res = yield userApi.onCreateUser(data);
-        response = res
+        response = res;
+        if (res?.success) {
+          notification.success("User created successfully");
+        }
       } catch (error) {
-        catchApiError(error, "createUser")
+        catchApiError(error, "createUser");
       } finally {
         self.loadingCreatUser = false;
-        return response
+        return response;
       }
     });
 
-    const loadUserInfo = flow(function* () {
+    const loadUserInfo = flow(function* (navigate = null) {
       self.loading = true;
+      let response = null;
       try {
         self.loading = true;
         const res = yield userApi.getCurrentUserDetails();
+        response = res;
+        self.userInfo = res?.user
       } catch (error) {
-        catchApiError(error, "loadUserInfo")
+        response = error.response;
+        catchApiError(error, "loadUserInfo");
+        if (response?.status === 404) {
+          onLogOutClearAll(navigate);
+        }
       } finally {
         self.loading = false;
+        return response;
       }
     });
 
@@ -93,7 +125,7 @@ export const user = types
         self.userLoginData = res;
         notification.info("User Updated Successfully");
       } catch (error) {
-        console.log("error", error);
+        catchApiError(error, "updateClientDetails");
       } finally {
         self.loading = false;
       }
@@ -105,7 +137,7 @@ export const user = types
         self.userLoginData = res.results;
         notification.info("User Deleted Successfully");
       } catch (error) {
-        catchApiError(error)
+        catchApiError(error);
       } finally {
         self.loading = false;
       }

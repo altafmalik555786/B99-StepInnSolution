@@ -45,7 +45,7 @@ class UserApi extends BaseApi {
 
       return response.data;
     } catch (error) {
-      throw Promise.reject(error);
+      throw error;
     }
   };
   updateUserDetails = async (data, recordId) => {

@@ -51,9 +51,8 @@ import {
   NUM_STR_0,
   NUM_STR_85,
 } from "../const";
-import TextArea from "antd/es/input/TextArea";
 import { constRoute } from "@utils/route";
-import { roleTypeOptionsList } from "../json-data";
+import { roleNameTypeUserList } from "@utils/json-data";
 
 const validateMessages = {
   required: LOWER_LABLE_REQUIRED,
@@ -92,8 +91,8 @@ const Users = observer(() => {
   }, []);
 
   const roleTypeOptions = useMemo(
-    () => roleTypeOptionsList,
-    [roleTypeOptionsList]
+    () => roleNameTypeUserList,
+    [roleNameTypeUserList]
   );
 
   useEffect(() => {

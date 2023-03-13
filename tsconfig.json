@@ -3,10 +3,13 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "target": "es5",
+    "types": [
+      "@types/styled-components"
+    ],
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "esnext",
     ],
     "allowJs": false,
     "skipLibCheck": true,

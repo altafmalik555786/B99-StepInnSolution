@@ -15,8 +15,6 @@ const Sidebar = observer(({ collapsed }: any) => {
     setActiveElement(location?.pathname);
   }, [location?.pathname]);
 
-  
-
   const menuList = menusList ?? [];
 
   menuList?.map((item) => {

@@ -33,6 +33,7 @@ import {
   CAMEL_USER_TYPE,
   CAP_BALANCE,
   LOWER_BALANCE,
+  LOWER_TEXT_AREA,
 } from "@utils/const";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import style from "./style.module.scss";
@@ -99,7 +100,6 @@ const Users = observer(() => {
     setUserInfoData(getUserInfo);
   }, [getUserInfo]);
 
-
   return (
     <div className={style.usersContainerLayout}>
       <div className={style.usersContainer}>
@@ -153,9 +153,6 @@ const Users = observer(() => {
                 <CommonInput
                   variant={LOWER_TRANSPARENT}
                   inputType={LOWER_PASSWORD}
-                  onInput={(e) => {
-                    e.target.value = e.target.value.trim();
-                  }}
                 />
               </Form.Item>
               <Form.Item
@@ -171,9 +168,6 @@ const Users = observer(() => {
                 <CommonInput
                   variant={LOWER_TRANSPARENT}
                   inputType={LOWER_TEXT}
-                  onInput={(e) => {
-                    e.target.value = e.target.value.trim();
-                  }}
                 />
               </Form.Item>
               <Form.Item
@@ -189,9 +183,6 @@ const Users = observer(() => {
                 <CommonInput
                   variant={LOWER_TRANSPARENT}
                   inputType={LOWER_TEXT}
-                  onInput={(e) => {
-                    e.target.value = e.target.value.trim();
-                  }}
                 />
               </Form.Item>
               <Form.Item
@@ -207,9 +198,6 @@ const Users = observer(() => {
                 <CommonInput
                   variant={LOWER_TRANSPARENT}
                   inputType={LOWER_NUMBER}
-                  onInput={(e) => {
-                    e.target.value = e.target.value.trim();
-                  }}
                 />
               </Form.Item>
               <Form.Item
@@ -232,9 +220,6 @@ const Users = observer(() => {
                   inputType={LOWER_NUMBER}
                   min={"0"}
                   max={"85"}
-                  onInput={(e) => {
-                    e.target.value = e.target.value.trim();
-                  }}
                 />
               </Form.Item>
               <Form.Item
@@ -247,9 +232,14 @@ const Users = observer(() => {
                   },
                 ]}
               >
-                <TextArea />
+                <CommonInput
+                  variant={LOWER_TRANSPARENT}
+                  inputType={LOWER_TEXT_AREA}
+                />
+
+                {/* <TextArea /> */}
               </Form.Item>
-              <Form.Item
+             { userInfoData?.role > 0 && <Form.Item
                 name={CAMEL_USER_TYPE}
                 label={CAP_TYPE}
                 rules={[
@@ -269,10 +259,11 @@ const Users = observer(() => {
                           </Radio>
                         );
                       }
-                      return null
+                      return null;
                     })}
                 </Radio.Group>
               </Form.Item>
+              }
               <Form.Item
                 name={CAMEL_IS_ACTIVE}
                 label={CAMEL_IS_ACTIVE}

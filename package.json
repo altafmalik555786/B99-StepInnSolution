@@ -53,7 +53,11 @@
       "react-app/jest"
     ],
     "rules": {
-      "@typescript-eslint/no-unused-vars": 0
+      "@typescript-eslint/no-unused-vars": 0,
+      "no-template-curly-in-string": 0,
+      "react-hooks/exhaustive-deps": 0,
+      "jsx-a11y/anchor-is-valid": 0,
+      "jsx-a11y/alt-text": 0
     }
   },
 

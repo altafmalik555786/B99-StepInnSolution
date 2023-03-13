@@ -25,11 +25,9 @@
     border-radius: 4px;
     font-weight: 400;
     margin: 1px;
-    // padding-top: 10px;
     transition: 0.3s all ease-in-out;
     width: 100%;
     border-color: $dark-border-half-white;
-    word-spacing: -4px !important;
 
     &:hover {
       border-color: $color-link !important;

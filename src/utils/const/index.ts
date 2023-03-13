@@ -23,7 +23,19 @@ export const LOWER_TEXT = "text"
 export const LOWER_HORIZONTAL = "horizontal"
 export const LOWER_VERTICAL = "vertical"
 export const LOWER_CHECKED = "checked"
- 
+export const CAMEL_USER_NAME = "userName"
+export const LOWER_ROLE = "role"
+export const CAP_CREDIT = "Credit"
+export const LOWER_CREDIT = "credit"
+export const CAP_CLIENT_PL = "Client P/L"
+export const CAMEL_CLIENT_PL = "clientPL"
+export const CAP_EXPOSURE = "Exposure"
+export const LOWER_EXPOSURE = "exposure"
+export const CAP_OPTIONS = "Options"
+export const LOWER_OPTIONS = "options"
+
+
+
 
 //// TEXT CONSTANTS ////
 export const CAP_SUBMIT = "Submit";
